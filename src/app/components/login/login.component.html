@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="min-h-screen bg-gray-700 flex flex-col items-center justify-center">
+    <!-- Header -->
+    <header class="mb-10">
+      <h1 class="text-white text-4xl font-bold">Poll-Web</h1>
+    </header>
+  
+    <!-- Login Form -->
+    <form (submit)="userLogin()" [formGroup]="loginForm" class="bg-white dark:bg-gray-800 dark:border-gray-700 rounded-lg shadow-lg p-8 max-w-sm w-full">
+      <div class="mb-5">
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+        <input formControlName="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="name@flowbite.com" required />
+        <div class="text-red-700 h-auto">
+          <div class="error-message" *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
+              Please fill in this field.
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">
+              Please enter a valid email address.
+          </div>
+      </div>
+      </div>
+      <div class="mb-5">
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+        <input formControlName="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required />
+        <div class="text-red-700 h-auto">
+          <div class="error-message" *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
+              Please fill in this field.
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')?.touched">
+              Password must contain at least 8 characters.
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('password')?.errors?.['pattern'] && loginForm.get('password')?.touched">
+              Password must meet the required format.
+          </div>
+      </div>
+      </div>
+      <div class="mb-5">
+        <span class="text-sm text-gray-500 dark:text-gray-400">Don't have an account? </span>
+        <a [routerLink]="['/signup']" class="text-sm font-medium text-blue-700 hover:underline dark:text-blue-500">Sign up</a>
+      </div>
+      <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+          
+      
+  </div>
+  

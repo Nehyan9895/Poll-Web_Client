@@ -1,0 +1,69 @@
+<div *ngIf="pollData" class="bg-gray-700 flex flex-col min-h-screen p-4">
+  <app-header></app-header>
+  <div class="flex flex-grow w-full max-w-7xl mx-auto mt-10 space-x-6">
+    
+    <!-- Poll Section -->
+    <div class="w-full lg:w-2/3 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">{{ Poll.question }}</h1>
+      <form id="pollForm" (submit)="onSubmit($event)" class="mb-6">
+        <ul>
+          <li *ngFor="let option of Poll.options" class="mb-4">
+            <label class="flex items-center cursor-pointer">
+              <input
+                type="radio"
+                name="pollOptions"
+                [value]="option.optionText"
+                class="form-radio h-5 w-5 text-blue-600"
+              />
+              <span class="ml-3 text-lg text-gray-900 dark:text-gray-300">{{ option.optionText }}</span>
+            </label>
+          </li>
+        </ul>
+        <button type="submit" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
+          Submit Answer
+        </button>
+      </form>
+      <canvas id="chart"></canvas>
+    </div>
+    
+    <!-- Chat Section -->
+    <div class="w-full lg:w-1/3 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 flex flex-col">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Chat</h2>
+      <div class="flex flex flex-col justify-end">
+        <div class="h-96 md:h-96 lg:h-[30rem] overflow-y-auto p-4 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4 scroll-smooth" #chatContainer>
+          <div *ngFor="let msg of messages" [ngClass]="{'text-right': msg.senderId._id === userId, 'text-left': msg.senderId._id !== userId}" class="mb-2">
+            <div class="inline-block px-4 py-2 rounded-lg" [ngClass]="{
+              'bg-blue-500 text-white': msg.senderId._id === userId,
+              'bg-gray-300 text-gray-900 dark:bg-gray-600 dark:text-white': msg.senderId._id !== userId
+            }">
+              <div class="text-sm font-semibold">{{ msg.senderId.username }}</div>
+              <div class="text-base">{{ msg.message }}</div>
+              <div class="text-xs text-gray-500 mt-1">{{ msg.createdAt | date:'shortTime' }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex">
+          <input
+            [(ngModel)]="message"
+            (keydown.enter)="sendMessage()"
+            type="text"
+            class="flex-1 border border-gray-300 rounded-l-lg p-3 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+            placeholder="Type your message..."
+          />
+          <button
+            (click)="sendMessage()"
+            class="bg-blue-600 text-white px-6 rounded-r-lg hover:bg-blue-700 transition duration-300"
+          >
+            Send
+          </button>
+        </div>
+
+        <div  class="mt-4 text-sm text-gray-700 dark:text-gray-300">
+          Poll Created By: <strong>{{ pollCreatedBy }}</strong>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

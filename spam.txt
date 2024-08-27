@@ -1,0 +1,15 @@
+pollData: any;
+
+ngOnInit(): void {
+    this.loadPollData();
+  }
+
+  private loadPollData(): void {
+    const pollId = this.route.snapshot.paramMap.get('id');
+    if(pollId){
+    this.userService.getPollById(pollId).subscribe((data) => {
+      this.pollData = data;
+      this.initChart();
+    });
+  }
+  }

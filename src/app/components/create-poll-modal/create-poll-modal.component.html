@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Create a Poll</h1>
+<div mat-dialog-content>
+  <!-- Poll Question Input -->
+  <mat-form-field class="w-full">
+    <mat-label>Poll Question</mat-label>
+    <input matInput [(ngModel)]="pollData.question" placeholder="Enter your poll question" required>
+    <mat-error *ngIf="!pollData.question">Poll question is required</mat-error>
+  </mat-form-field>
+
+  <!-- Poll Options Inputs -->
+  <div class="my-4">
+    <mat-form-field class="w-full">
+      <mat-label>Option 1</mat-label>
+      <input matInput [(ngModel)]="pollData.options[0]" placeholder="Enter option 1" required>
+      <mat-error *ngIf="!pollData.options[0]">Option 1 is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Option 2</mat-label>
+      <input matInput [(ngModel)]="pollData.options[1]" placeholder="Enter option 2" required>
+      <mat-error *ngIf="!pollData.options[1]">Option 2 is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Option 3</mat-label>
+      <input matInput [(ngModel)]="pollData.options[2]" placeholder="Enter option 3" required>
+      <mat-error *ngIf="!pollData.options[2]">Option 3 is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Option 4</mat-label>
+      <input matInput [(ngModel)]="pollData.options[3]" placeholder="Enter option 4" required>
+      <mat-error *ngIf="!pollData.options[3]">Option 4 is required</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button class="mt-6 bg-red-700 text-white px-4 py-2 m-2 rounded" (click)="onCancel()">Cancel</button>
+  <button mat-button class="mt-6 bg-black text-white px-4 py-2 m-2 rounded"
+          [disabled]="!isFormValid()"
+          [mat-dialog-close]="pollData" cdkFocusInitial>Save Poll</button>
+</div>
